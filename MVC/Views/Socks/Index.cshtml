@@ -17,7 +17,7 @@
 @foreach(var sock in Model)
 {
    <p>
-        @sock.Brand - @sock.Size - @sock.Price - @sock.OnStock
+        <a href="/socks/getbyid/@sock.Id">@sock.Id</a> - @sock.Brand - @sock.Size - @sock.Price - @sock.OnStock
    </p>
 }
 
