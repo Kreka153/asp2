@@ -8,11 +8,16 @@
 *@
 
 @{
-    // c# kod
+    DateTime datum = (DateTime)ViewData["datum"];
+    
 }
 
 
 <h1>Ponožky</h1>
+
+<div>
+    @datum.ToString("dd. MM. yyyy")
+</div>
 
 @foreach(var sock in Model)
 {

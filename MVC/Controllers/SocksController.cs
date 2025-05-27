@@ -14,6 +14,8 @@ namespace MVC.Controllers
 
             var data = SocksDataset.GetSocks();
 
+            ViewData["datum"] = DateTime.Now;
+          
             return View(data);
         }
 

@@ -39,6 +39,8 @@ app.MapGet("/weatherforecast", () =>
 
 app.MapGet("/", () => $"API bìží, nyní je {DateTime.Now}").WithOpenApi();
 
+app.MapGet("/detail/{id:int}", (int id) => $"Zobrazuji detail produktu id: {id}");
+
 app.Run();
 
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
