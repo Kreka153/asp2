@@ -1,22 +1,48 @@
-﻿using System.Globalization;
+﻿using Microsoft.AspNetCore.Http.Extensions;
+using MVC.Data;
+using MVC.Models;
+using System.Globalization;
 
-namespace MVC.Middleware
+namespace MVC.Middleware;
+
+public class RequestLogMiddleware
 {
-    public class RequestLogMiddleware
+    private readonly RequestDelegate _next;
+    //private readonly ApplicationDbContext _db;
+    //private readonly HttpContext _httpContext;
+
+    public RequestLogMiddleware(RequestDelegate next, ApplicationDbContext db)
     {
-        private readonly RequestDelegate _next;
+        _next = next;
+        //_db = db;
+        //_httpContext = httpContext;
+    }
 
-        public RequestLogMiddleware(RequestDelegate next)
+    public async Task InvokeAsync(HttpContext httpContext, ApplicationDbContext db)
+    {
+        var ip = httpContext.Connection.RemoteIpAddress.ToString();
+        var url = httpContext.Request.GetDisplayUrl();
+
+        var log = new RequestLog()
         {
-            _next = next;
-        }
+            Date = DateTime.Now,
+            IpAddress = ip,
+            Url = url,
+        };
 
-        public async Task InvokeAsync(HttpContext context)
-        {
-            
+        db.RequestLogs.Add(log);
+        db.SaveChanges();
 
-            // Call the next delegate/middleware in the pipeline.
-            await _next(context);
-        }
+        // Call the next delegate/middleware in the pipeline.
+        await _next(httpContext);
+    }
+}
+
+public static class MyCustomMiddlewareExtensions
+{
+    public static IApplicationBuilder UseRequestLog(
+        this IApplicationBuilder builder)
+    {
+        return builder.UseMiddleware<RequestLogMiddleware>();
     }
 }
