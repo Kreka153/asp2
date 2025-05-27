@@ -52,6 +52,8 @@ app.MapGet("/detail/{id:int}", (int id, SimpleFileLogger logger) =>
     }
     );
 
+
+//app.Map("/custom", (ILogger log) => Custom.Process(log));
 app.Run();
 
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
