@@ -1,9 +1,13 @@
+using MinApi8;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSingleton<SimpleFileLogger>();
 
 var app = builder.Build();
 
@@ -15,6 +19,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+
 
 var summaries = new[]
 {
@@ -39,7 +45,12 @@ app.MapGet("/weatherforecast", () =>
 
 app.MapGet("/", () => $"API bìží, nyní je {DateTime.Now}").WithOpenApi();
 
-app.MapGet("/detail/{id:int}", (int id) => $"Zobrazuji detail produktu id: {id}");
+app.MapGet("/detail/{id:int}", (int id, SimpleFileLogger logger) =>
+    {
+        logger.Log("loguji z api");
+        return $"Zobrazuji detail produktu id: {id}";
+    }
+    );
 
 app.Run();
 

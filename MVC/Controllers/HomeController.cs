@@ -11,15 +11,22 @@ namespace MVC.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+
+            
         }
 
         public IActionResult Index()
         {
+            _logger.Log(LogLevel.Information, "volam metodu Index na Home");
+
             return View();
+
         }
 
         public IActionResult Privacy()
         {
+            _logger.Log(LogLevel.Information, "volam metodu Privacy na Home");
+
             return View();
         }
 

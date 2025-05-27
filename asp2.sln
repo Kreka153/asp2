@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinApi8", "MinApi8\MinApi8.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC", "MVC\MVC.csproj", "{F6CDD7D4-0A68-4870-ADF0-1BBD54105FA2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{E24E3EF3-9E66-4720-803F-0017E2FCD78D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F6CDD7D4-0A68-4870-ADF0-1BBD54105FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6CDD7D4-0A68-4870-ADF0-1BBD54105FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6CDD7D4-0A68-4870-ADF0-1BBD54105FA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E24E3EF3-9E66-4720-803F-0017E2FCD78D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E24E3EF3-9E66-4720-803F-0017E2FCD78D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E24E3EF3-9E66-4720-803F-0017E2FCD78D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E24E3EF3-9E66-4720-803F-0017E2FCD78D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MVC.Data;
+using MVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddControllers();
+
+builder.Services.AddSingleton<SimpleFileLogger>();
 
 var app = builder.Build();
 
