@@ -4,6 +4,17 @@
 
 <h3>Prvních 20 osob</h3>
 
+﻿<div class="row g-3 align-items-center">
+   <div class="col-auto">
+        <InputText @bind-Value="SearchTerm" class="form-control" />
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary" @onclick="Search">
+            Hledej
+        </button>
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -68,6 +79,8 @@
         {"disabled",""}
     };
 
+    string SearchTerm = "";
+
     List<BlazorApp.Model.Person> peopleToShow = new List<Model.Person>();
 
     private int take = 10;
@@ -79,6 +92,14 @@
     protected override void OnInitialized()
     {
         peopleToShow = data.GetData().Take(take).ToList();
+    }
+
+    void Search()
+    {
+        peopleToShow = data.GetData()
+        .Where(x => x.Email.ToLower().Contains(SearchTerm.ToLower()))
+        .Take(10)
+        .ToList();
     }
 
     void Prev()

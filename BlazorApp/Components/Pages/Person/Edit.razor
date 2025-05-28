@@ -3,13 +3,14 @@
 
 <h3>Edit</h3>
 
-﻿<EditForm Model="Person" OnSubmit="Save">
+﻿<EditForm Model="Person" OnValidSubmit="Save">
     <DataAnnotationsValidator />
 
     <div class="form-group">
         <label class="control-label col-md-2">Jméno</label>
         <div class="col-md-3">
             <InputText @bind-Value="Person.FirstName" class="form-control" />
+            <ValidationMessage For="() => Person.FirstName" />
         </div>
     </div>
     <div class="form-group">

@@ -1,10 +1,16 @@
-﻿namespace BlazorApp.Model;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BlazorApp.Model;
 
 public class Person
 {
     public int Id { get; set; }
+
+    [MaxLength(15)]
     public string FirstName { get; set; }
     public string LastName { get; set; }
+
+    [EmailAddress]
     public string Email { get; set; }
     public DateTime DateOfBirth { get; set; }
     public Address Address { get; set; }
