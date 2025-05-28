@@ -9,6 +9,8 @@ namespace MVC.Data
 
         public DbSet<NewSocks> NewSocks { get; set; }
 
+        public DbSet<RequestLog> RequestLogs { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

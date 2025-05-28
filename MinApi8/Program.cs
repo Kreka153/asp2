@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using MinApi8;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,9 +8,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 builder.Services.AddSingleton<SimpleFileLogger>();
 
+builder.Services.AddDirectoryBrowser();
+var fileProvider = new PhysicalFileProvider(builder.Environment.WebRootPath);
+
+
+builder.Services.AddDirectoryBrowser();
+
 var app = builder.Build();
+
+app.UseDirectoryBrowser(new DirectoryBrowserOptions
+{
+    FileProvider = fileProvider,
+    RequestPath = "/wwwroot",
+    
+});
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -52,6 +69,8 @@ app.MapGet("/detail/{id:int}", (int id, SimpleFileLogger logger) =>
     }
     );
 
+
+//app.Map("/custom", (ILogger log) => Custom.Process(log));
 app.Run();
 
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
