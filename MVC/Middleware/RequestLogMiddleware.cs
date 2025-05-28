@@ -11,12 +11,14 @@ public class RequestLogMiddleware
     //private readonly ApplicationDbContext _db;
     //private readonly HttpContext _httpContext;
 
-    public RequestLogMiddleware(RequestDelegate next, ApplicationDbContext db)
+    public RequestLogMiddleware(RequestDelegate next)
     {
         _next = next;
         //_db = db;
         //_httpContext = httpContext;
     }
+
+    
 
     public async Task InvokeAsync(HttpContext httpContext, ApplicationDbContext db)
     {

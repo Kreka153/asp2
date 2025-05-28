@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MVC.Data;
+using MVC.Middleware;
 using MVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,9 +39,12 @@ else
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+
+app.UseRequestLog();
 
 app.UseRouting();
+
+app.UseStaticFiles();
 
 app.UseAuthorization();
 
