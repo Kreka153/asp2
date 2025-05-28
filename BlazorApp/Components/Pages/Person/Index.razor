@@ -22,7 +22,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var person in Top20)
+        @foreach(var person in peopleToShow)
         {
             <tr>
                 <td>
@@ -43,12 +43,62 @@
 
 </table>
 
+<div class="row">
+    <div class="col-2">
+        @if (!prevDisabled)
+        {
+            <button class="btn btn-primary" @onclick="Prev">Předchozí</button>
+        }
+        else
+        {
+            <button disabled="true" class="btn btn-primary" @onclick="Prev">Předchozí</button>
+        }
+    </div>
+    <div class="col-2 @moje">
+        <button @attributes="customdataattr" class="btn btn-primary" @onclick="Next">Další</button>
+    </div>
+</div>
+
+
+
 
 @code {
-    List<BlazorApp.Model.Person> Top20 = new List<Model.Person>();
+    Dictionary<string, object> customdataattr = new()
+    {
+        {"disabled",""}
+    };
+
+    List<BlazorApp.Model.Person> peopleToShow = new List<Model.Person>();
+
+    private int take = 10;
+    private int start = 0;
+    string moje = "show";
+
+    private bool prevDisabled = true;
 
     protected override void OnInitialized()
     {
-        Top20 = data.GetData().Take(20).ToList();
+        peopleToShow = data.GetData().Take(take).ToList();
+    }
+
+    void Prev()
+    {
+        start -= take;
+        start = Math.Max(0, start);
+
+        if (start == 0)
+            prevDisabled = true;
+
+        peopleToShow = data.GetData().Skip(start).Take(take).ToList();
+    }
+
+    void Next()
+    {
+        prevDisabled = false;
+
+        start += take;
+        start = Math.Min(start, data.GetData().Count - take);
+
+        peopleToShow = data.GetData().Skip(start).Take(take).ToList();
     }
 }
